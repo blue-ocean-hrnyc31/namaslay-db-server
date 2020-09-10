@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  server:
+    build: ./server
+    volumes:
+      - ./server:/usr/src/app/server
+    ports:
+      - 4444:4444
+    depends_on:
+      - db
+  db:
+    build: ./database
+    ports:
+      - 5432:5432
+    volumes:
+      - ./database/pgdata:/var/lib/postgresql/data
