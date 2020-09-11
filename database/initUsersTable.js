@@ -51,6 +51,10 @@ client
      );
     `);
   })
+  .then(res => {
+    console.log(`Created ${tableName} table! Bye!`);
+    client.end();
+  })
   .catch((err) => {
     console.log(`Error in creating ${tableName} table: `, err);
     client.end();
