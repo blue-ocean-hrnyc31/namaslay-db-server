@@ -2,14 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 4444;
-const cors = require('cors')
+const { DB_HOST } = require('../config.js');
 
 
 // host: 'the-name-for-my-postgres-container-within-the-docker-compose-yml-file'
 const { Client, Pool } = require('pg');
 const client = new Client({
   user: 'postgres',
-  host: '34.229.137.235', // Can use docker network to connect (but not right now)
+  host: DB_HOST, // Can use docker network to connect (but not right now)
   database: 'postgres',
   password: 'password',
   port: 5432,
