@@ -39,49 +39,18 @@ app.use(function (req, res, next) {
 /***********************************************************/
 app.get('/', (req, res) => {
   console.log(`Received API request for /`);
+  res.send(`You have reached the Namaslay server!`);
+})
+
+
+app.get('/users', (req, res) => {
+  console.log(`Received API request for /users`);
   console.log(req.query);
-  //res.send('Boom')
   client.query(`
-        SELECT * FROM players
-        WHERE team = $1
-        AND position = $2;
-      `, [req.query.team, req.query.pos])
-    .then(dbObj => {
-      console.log(Object.keys(dbObj));
-
-      res.send(dbObj);
-    })
-    .catch(err => {
-      console.log('Error in retrieving info from DB: ', err);
-      res.sendStatus(404);
-    });
-})
-
-app.get('/teams', (req, res) => {
-  console.log(`Received API request for /teams`);
-  //res.send('Boom')
-  client.query(`
-        SELECT DISTINCT team FROM players;
+        SELECT * FROM users;
       `)
     .then(dbObj => {
-      console.log(Object.keys(dbObj));
-
-      res.send(dbObj);
-    })
-    .catch(err => {
-      console.log('Error in retrieving info from DB: ', err);
-      res.sendStatus(404);
-    });
-})
-
-app.get('/position', (req, res) => {
-  console.log(`Received API request for /position`);
-  //res.send('Boom')
-  client.query(`
-        SELECT DISTINCT position FROM players;
-      `)
-    .then(dbObj => {
-      console.log(Object.keys(dbObj));
+      console.log(`Successfully retrieved info from DB`, Object.keys(dbObj));
 
       res.send(dbObj);
     })
