@@ -17,7 +17,8 @@ module.exports ={
     },
 
     otherRoute: (req, res) => {
-        pool.query('SELECT * FROM users')
+        let q = 'SELECT * FROM users';
+        pool.query(q)
         .then(({rows}) => {
             res.send(rows);
         })
