@@ -66,6 +66,8 @@ app.get('/users', (req, res) => {
     });
 })
 
+const router = require('./router.js')
+app.use('/', router);
 
 /********************/
 /*****Start-Up*******/
