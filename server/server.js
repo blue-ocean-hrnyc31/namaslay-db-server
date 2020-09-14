@@ -43,10 +43,7 @@ app.use(function (req, res, next) {
 /***********************************************************/
 /*************************Routes****************************/
 /***********************************************************/
-app.get('/', (req, res) => {
-  console.log(`Received API request for /`);
-  res.send(`You have reached the Namaslay server!`);
-})
+
 
 
 app.get('/users', (req, res) => {

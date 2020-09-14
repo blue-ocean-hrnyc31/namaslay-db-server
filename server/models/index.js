@@ -1,4 +1,4 @@
-const yourmodel = require('./yourmodel.js');
+
 const leaderboard = require('./leaderboard');
 const events = require('./events.js');
 
