@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const controllers = require('./controllers/index.js')
+const controllers = require('./controllers/index.js');
 
-router.get('/events', controllers.events.getAllEvents);
-router.post('/event', controllers.events.postEvent);
+
+router.get('your/route', controllers.yourcontrollers.yourRoute);
+router.get('/leaders', controllers.leaderboard.getLeaders);
 
 module.exports = router;

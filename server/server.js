@@ -8,7 +8,7 @@ const {
   DB_DATABASE,
   DB_PASSWORD,
   DB_PORT,
-} = require("../config.js");
+} = require("./config");
 
 
 // host: 'the-name-for-my-postgres-container-within-the-docker-compose-yml-file'
