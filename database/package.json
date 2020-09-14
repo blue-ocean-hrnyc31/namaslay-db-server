@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "pg": "^8.3.3",
     "pg-copy-streams": "^5.1.1",
     "puppeteer": "^5.2.1"

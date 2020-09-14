@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const controllers = require('./controllers/index.js')
 
-router.get('your/route', controllers.yourcontrollers.yourRoute);
+router.get('/events', controllers.events.getAllEvents);
+router.post('/event', controllers.events.postEvent);
 
 module.exports = router;
