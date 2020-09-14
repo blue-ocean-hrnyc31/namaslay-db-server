@@ -5,7 +5,7 @@ const {
   DB_DATABASE,
   DB_PASSWORD,
   DB_PORT,
-} = require("../config.js");
+} = require("./config");
 
 // Connection to Postgres DB
 const client = new Client({

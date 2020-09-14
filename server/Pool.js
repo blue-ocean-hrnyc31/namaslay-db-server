@@ -6,7 +6,7 @@ const {
     DB_DATABASE,
     DB_PASSWORD,
     DB_PORT,
-  } = require('../config.js');
+  } = require('./config.js');
 
 const pool = new Pool({
     user: DB_USER,
