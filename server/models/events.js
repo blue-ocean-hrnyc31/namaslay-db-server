@@ -15,7 +15,10 @@ module.exports = {
                     console.log(err.stack);
                 })
             })
-            
+            .catch(err => {
+                console.log(`Error in connecting to DB (get events):`, err);
+            })
+
     },
 
     postEvent: (host, title, description, location, start, end) => {
@@ -34,7 +37,11 @@ module.exports = {
                     console.log(err.stack);
                 })
             })
-            
+            .catch(err => {
+                console.log(`Error in connecting to DB (post events):`, err);
+            })
+
+
     },
 
     select: (id) => {
