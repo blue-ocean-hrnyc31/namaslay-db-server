@@ -185,6 +185,36 @@ client
         'Batcave',
         '{"caves"}',
         'Bat Master'
+      ),
+      (
+        'Clark',
+        'Kent',
+        'cK',
+        'superMan@aol.com',
+        '$2b$10$EjWAPqe40rgd5yv8Xruoiem9vnn.FnhDkAjLiFbh7J.91uzwdahqm',
+        0,
+        0,
+        CURRENT_TIMESTAMP,
+        NULL,
+        NULL,
+        'krypton',
+        '{"Hidden"}',
+        'Super'
+      ),
+      (
+        'Bruce',
+        'Banner',
+        'Hulk',
+        'Hulk@yahoo.com',
+        '$2b$10$EjWAPqe40rgd5yv8Xruoiem9vnn.FnhDkAjLiFbh7J.91uzwdahqm',
+        25,
+        1000,
+        CURRENT_TIMESTAMP,
+        NULL,
+        NULL,
+        'New York City',
+        '{"Hidden"}',
+        'Smash'
       )
     `
     );
