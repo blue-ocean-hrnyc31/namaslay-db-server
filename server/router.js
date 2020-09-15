@@ -9,4 +9,9 @@ router.get('/leaders', controllers.leaderboard.getLeaders);
 router.post('/events', controllers.events.postEvent);
 router.get('/events', controllers.events.getAllEvents);
 
+router.put('/asana-river/user/:user_id', controllers.river.updateUsersRiverStatus)
+router.put('/meditation-river/user/:user_id', controllers.river.updateUsersRiverStatus)
+router.get('/asana-river/users/:current_river', controllers.river.getAllUsers)
+router.get('/meditation-river/users/:current_river', controllers.river.getAllUsers)
+
 module.exports = router;
