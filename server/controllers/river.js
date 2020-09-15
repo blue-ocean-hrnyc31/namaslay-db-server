@@ -1,10 +1,11 @@
-const { rivers } = require("../models");
+const models = require("../models");
 
 module.exports = {
   getAllUsers: (req, res) => {
-    const river = req.query.river;
-    rivers
-      .readAllUsers(river)
+    console.log(req.params)
+    const current_river = [req.params.current_river];
+    models.river
+      .readAllUsers(current_river)
       .then((data) => {
         res.status(200).json(data.rows);
       })
@@ -13,13 +14,15 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  UpdateUsersRiverStatus: (req, res) => {
-    const id = req.query.river;
+  updateUsersRiverStatus: (req, res) => {
+    console.log(req.body)
+    console.log(req.params)
+    const id = req.params.user_id;
     const { current_river, current_activity, total_mins } = req.body;
     const params = [id, current_river, current_activity, total_mins || 0];
-    rivers
+    models.river
       .updateUserEntry(params)
-      .then((data) => {
+      .then(() => {
         res.sendStatus(201);
       })
       .catch((err) => {

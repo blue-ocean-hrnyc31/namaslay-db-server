@@ -1,10 +1,10 @@
 
 const leaderboard = require('./leaderboard');
 const events = require('./events.js');
-const rivers = require('./rivers.js')
+const river = require('./river.js')
 
 module.exports ={
     leaderboard,
     events,
-    rivers
+    river
 };
