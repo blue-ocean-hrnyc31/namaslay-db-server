@@ -13,6 +13,7 @@ module.exports = {
             return res;
           })
           .catch((err) => {
+            client.release();
             console.log(err);
           });
       })
@@ -37,6 +38,7 @@ module.exports = {
           return res;
         })
         .catch((err) => {
+          client.release();
           console.log(err);
         });
       })
