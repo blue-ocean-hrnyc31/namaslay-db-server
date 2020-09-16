@@ -45,7 +45,7 @@ client
       id SERIAL,
       username VARCHAR,
       content VARCHAR,
-      postedAt BIGINT PRIMARY KEY
+      posted_at BIGINT PRIMARY KEY
      );
     `);
   })
@@ -58,23 +58,23 @@ client
       INSERT INTO ${tableName} (
         username,
         content,
-        postedAt
+        posted_at
       ) VALUES (
         'Liam',
         'This river is soooo nice',
         ${Date.now() + 1000}
       ), (
         'Nuri',
-        'Wow, whoever design this river is awesome!',
+        'Whoever designed this river is awesome!',
         ${Date.now() + 10000}
       ), (
         'Deo',
-        'Why are you slacking off in the River! Get back to work!',
+        'Get back to work!',
         ${Date.now() + 100000}
       ), (
         'Armando',
         'Je veux un croissant',
-        ${Date.now() + 1000000}
+        ${Date.now() + 200000}
       );
     `)
   })
