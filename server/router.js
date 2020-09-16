@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
 router.get('/leaders', controllers.leaderboard.getLeaders);
 router.post('/events', controllers.events.postEvent);
 router.get('/events', controllers.events.getAllEvents);
+router.get('/events/upcoming', controllers.events.getRecentEvents);
 
 router.put('/asana-river/user/:user_id', controllers.river.updateUsersRiverStatus)
 router.put('/meditation-river/user/:user_id', controllers.river.updateUsersRiverStatus)

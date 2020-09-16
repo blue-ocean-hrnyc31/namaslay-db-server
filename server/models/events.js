@@ -28,7 +28,6 @@ module.exports = {
             .then(client => {
                 return client.query(q, [host, title, description, location, start, end])
                 .then(res => {
-                    console.log('post query');
                     client.release();
                     return res;
                 })
@@ -44,19 +43,23 @@ module.exports = {
 
     },
 
-    select: (id) => {
-        let q = 'SELET * FROM events WHERE id = $1';
+    getRecentEvents: () => {
+        const now = new Date();
+        let q = 'SELECT * FROM events WHERE start_time > $1 ORDER BY start_time ASC LIMIT 5';
         return pool.connect()
             .then(client => {
-                return client.query(q, [id])
-            })
-            .then(res => {
-                client.release();
-                return res;
+                return client.query(q, [now])
+                .then(res => {
+                    client.release();
+                    return res;
+                })
+                .catch(err => {
+                    client.release();
+                    console.log(err.stack);
+                })
             })
             .catch(err => {
-                client.release();
-                console.log(err.stack);
+                console.log(`Error in connecting to DB (post events):`, err);
             })
     }
 };
