@@ -6,7 +6,16 @@ module.exports = {
     return pool
       .connect()
       .then((client) => {
-        return client.query(queryStr, current_river);
+        return client
+          .query(queryStr, current_river)
+          .then((res) => {
+            client.release();
+            return res;
+          })
+          .catch((err) => {
+            client.release();
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -23,7 +32,15 @@ module.exports = {
     return pool
       .connect()
       .then((client) => {
-        return client.query(queryStr, params);
+        return client.query(queryStr, params)
+        .then((res) => {
+          client.release();
+          return res;
+        })
+        .catch((err) => {
+          client.release();
+          console.log(err);
+        });
       })
       .catch((err) => {
         console.log(err);
