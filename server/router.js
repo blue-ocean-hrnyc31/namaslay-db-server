@@ -29,9 +29,10 @@ router.get(
   controllers.river.getAllUsers
 );
 
+/****** Routes for the two River Chat Streams *******/
 router.get('/asana-river/chat', controllers.river.fetchChatStream);
 router.post('/asana-river/chat', controllers.river.postToChatStream);
-// router.get('/meditation-river/chat', controllers.river.updateUsersRiverStatus)
-// router.post('/meditation-river/chat', controllers.river.getAllUsers)
+router.get('/meditation-river/chat', controllers.river.fetchChatStream);
+router.post('/meditation-river/chat', controllers.river.postToChatStream);
 
 module.exports = router;

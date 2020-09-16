@@ -31,13 +31,15 @@ module.exports = {
   },
 
   fetchChatStream: (req, res) => {
-    console.log(`\nReceived get request for asana chat!`);
+    console.log(`\nReceived get request for ${req.url}!`);
+    const tableName = req.url === '/asana-river/chat' ? 'asanachat' : 'meditationchat';
+
     pool.connect()
       .then(client => {
         console.log(`Connected to DB!`);
 
         return client.query(`
-          SELECT * FROM asanachat
+          SELECT * FROM ${tableName}
           ORDER BY posted_at DESC;
         `)
           .then(dbRes => {
@@ -47,9 +49,9 @@ module.exports = {
             client.release();
           })
           .catch(err => {
-            console.log(`Error in get request for asana chat!`, err);
+            console.log(`Error in get request for ${tableName}!`, err);
 
-            res.status(404).send(`Error in get request for asana chat!`);
+            res.status(404).send(`Error in get request for ${tableName}!`);
             client.release();
           })
       })
@@ -62,14 +64,16 @@ module.exports = {
   },
 
   postToChatStream: (req, res) => {
-    console.log(`Received post request for asana chat!`, req.body);
+    console.log(`Received post request for ${req.url}!`, req.body);
+    const tableName = req.url === '/asana-river/chat' ? 'asanachat' : 'meditationchat';
+
 
     pool.connect()
       .then(client => {
         console.log(`Connected to DB!`);
 
         return client.query(`
-          INSERT INTO asanachat (
+          INSERT INTO ${tableName} (
             username,
             content,
             posted_at
@@ -86,10 +90,10 @@ module.exports = {
             res.send(201);
           })
           .catch(err => {
-            console.log(`Error in post request for asana chat!`, err);
+            console.log(`Error in post request for ${tableName}!`, err);
 
             client.release();
-            res.status(404).send(`Error in post request for asana chat!`);
+            res.status(404).send(`Error in post request for ${tableName}!`);
           })
       })
       .catch(err => {
