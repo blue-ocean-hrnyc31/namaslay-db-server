@@ -14,4 +14,9 @@ router.put('/meditation-river/user/:user_id', controllers.river.updateUsersRiver
 router.get('/asana-river/users/:current_river', controllers.river.getAllUsers)
 router.get('/meditation-river/users/:current_river', controllers.river.getAllUsers)
 
+router.get('/asana-river/chat', controllers.river.fetchChatStream)
+router.post('/asana-river/chat', controllers.river.postToChatStream)
+// router.get('/meditation-river/chat', controllers.river.updateUsersRiverStatus)
+// router.post('/meditation-river/chat', controllers.river.getAllUsers)
+
 module.exports = router;

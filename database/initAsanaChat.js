@@ -17,7 +17,7 @@ const client = new Client({
 });
 
 var start = Date.now();
-const tableName = "events";
+const tableName = "asanaChat";
 
 // Connect to DB
 client
@@ -42,18 +42,47 @@ client
 
     return client.query(`
     CREATE TABLE ${tableName} (
-      id SERIAL PRIMARY KEY,
-      host VARCHAR NOT NULL DEFAULT 'NULL',
-      title VARCHAR NOT NULL DEFAULT 'NULL',
-      description VARCHAR NOT NULL DEFAULT 'NULL',
-      location VARCHAR NOT NULL DEFAULT 'NULL',
-      start_time timestamp,
-      end_time timestamp
+      id SERIAL,
+      username VARCHAR,
+      content VARCHAR,
+      posted_at BIGINT PRIMARY KEY
      );
     `);
   })
   .then(res => {
-    console.log(`Created ${tableName} table! Bye!`);
+    console.log(`Created ${tableName} table! Put some initial messages in!`,
+    Date.now() - start,
+    " ms\n");
+
+    return client.query(`
+      INSERT INTO ${tableName} (
+        username,
+        content,
+        posted_at
+      ) VALUES (
+        'Liam',
+        'This river is soooo nice',
+        ${Date.now() + 1000}
+      ), (
+        'Nuri',
+        'Whoever designed this river is awesome!',
+        ${Date.now() + 10000}
+      ), (
+        'Deo',
+        'Get back to work!',
+        ${Date.now() + 100000}
+      ), (
+        'Armando',
+        'Je veux un croissant',
+        ${Date.now() + 200000}
+      );
+    `)
+  })
+  .then(res => {
+    console.log(`Put some data into the ${tableName} table! Bye!`,
+    Date.now() - start,
+    " ms\n");
+
     client.end();
   })
   .catch((err) => {
