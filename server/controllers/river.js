@@ -1,4 +1,5 @@
 const models = require("../models");
+const pool = require("../Pool");
 
 module.exports = {
   getAllUsers: (req, res) => {
@@ -14,6 +15,7 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+
   updateUsersRiverStatus: (req, res) => {
     console.log(req.body)
     console.log(req.params)
@@ -29,5 +31,75 @@ module.exports = {
         console.error(err);
         res.sendStatus(500);
       });
+  },
+
+  fetchChatStream: (req, res) => {
+    console.log(`\nReceived get request for asana chat!`);
+    pool.connect()
+      .then(client => {
+        console.log(`Connected to DB!`);
+
+        return client.query(`
+          SELECT * FROM asanachat
+          ORDER BY posted_at DESC;
+        `)
+          .then(dbRes => {
+            console.log(`Successfully got messages from DB, send to client!\n`);
+
+            res.send(dbRes.rows);
+            client.release();
+          })
+          .catch(err => {
+            console.log(`Error in get request for asana chat!`, err);
+
+            res.status(404).send(`Error in get request for asana chat!`);
+            client.release();
+          })
+      })
+      .catch(err => {
+        console.log(`Error in getting client from pool!`, err);
+        res.sendStatus(404);
+      })
+
+
+  },
+
+  postToChatStream: (req, res) => {
+    console.log(`Received post request for asana chat!`, req.body);
+
+    pool.connect()
+      .then(client => {
+        console.log(`Connected to DB!`);
+
+        return client.query(`
+          INSERT INTO asanachat (
+            username,
+            content,
+            posted_at
+          ) VALUES (
+            $1,
+            $2,
+            $3
+          );
+        `, [req.body.currentUser, req.body.message, req.body.submitTime])
+          .then(dbRes => {
+            console.log(`Successfully posted message in DB! Tell client 201!\n`);
+
+            client.release();
+            res.send(201);
+          })
+          .catch(err => {
+            console.log(`Error in post request for asana chat!`, err);
+
+            client.release();
+            res.status(404).send(`Error in post request for asana chat!`);
+          })
+      })
+      .catch(err => {
+        console.log(`Error in getting client from pool!`, err);
+
+        res.sendStatus(404);
+      })
+
   },
 };
