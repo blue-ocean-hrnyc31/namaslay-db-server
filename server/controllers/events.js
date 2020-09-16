@@ -24,5 +24,15 @@ module.exports = {
             console.log('getAll events error', err);
             res.sendStatus(404);
         })
+    },
+
+    getRecentEvents: (req, res) => {
+        events
+        .getRecentEvents()
+        .then(({rows}) => res.send(rows))
+        .catch(err => {
+            console.log('getAll events error', err);
+            res.sendStatus(404);
+        })
     }
 }
