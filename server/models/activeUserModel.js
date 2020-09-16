@@ -2,7 +2,7 @@ const pool = require('../Pool.js');
 
 module.exports = {
   getAllActiveUsers: () => {
-    let query = `SELECT COUNT(user_id) FROM users WHERE current_river IS NOT NULL`;
+    let q = `SELECT COUNT(user_id) FROM users WHERE current_river IS NOT NULL`;
 
     return pool
       .connect()
