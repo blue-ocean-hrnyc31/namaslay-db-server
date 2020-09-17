@@ -40,7 +40,7 @@ module.exports = {
 
         return client.query(`
           SELECT * FROM ${tableName}
-          ORDER BY posted_at DESC;
+          ORDER BY posted_at DESC LIMIT 20;
         `)
           .then(dbRes => {
             console.log(`Successfully got messages from DB, send to client!\n`);
